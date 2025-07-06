@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Pharmacy - Bendik Consultancy</title>
+    <style>
+        /* Same styles as buy-pharmacy.html */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #37b627;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            background: #37b627;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        .submit-btn:hover {
+            background: #37b627;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Sell Your Pharmacy</h1>
+        <form id="sellForm" action="process-sell.php" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="pharmacy_name">Pharmacy Name</label>
+                <input type="text" id="pharmacy_name" name="pharmacy_name" required>
+            </div>
+            <div class="form-group">
+                <label for="owner_name">Owner Name</label>
+                <input type="text" id="owner_name" name="owner_name" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location (Full Address)</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Sell Price (RWF)</label>
+                <input type="number" id="price" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_email">Contact Email</label>
+                <input type="email" id="contact_email" name="contact_email" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_phone">Contact Phone</label>
+                <input type="tel" id="contact_phone" name="contact_phone" required>
+            </div>
+            <div class="form-group">
+                <label for="photos">Upload Photos (Max 5MB each)</label>
+                <input type="file" id="photos" name="photos[]" multiple accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="description">Business Description</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Sell Pharmacy</button>
+        </form>
+    </div>
+
+     <!-- Custom Floating Chat Button -->
+<div id="customChatButton" onclick="Tawk_API.maximize()">
+  💬 Chat
+</div>
+
+<style>
+  #customChatButton {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #03a84e;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 9999;
+    transition: background 0.3s;
+  }
+
+  #customChatButton:hover {
+    background-color: #028c40;
+  }
+</style>
+
+<!-- Tawk.to Chat Script -->
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+
+  (function () {
+    var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/685aed47c6211019122b1b69/1iuhitoo6';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+</script>
+
+</body>
+</html>

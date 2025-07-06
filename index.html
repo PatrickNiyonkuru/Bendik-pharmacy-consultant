@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bendik Pharmacy Consultancy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ====== BASIC RESET ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        /* ====== COLORS ====== */
+        :root {
+            --green: #7CB342;
+            --dark-green: #689F38;
+            --light-green: #AED581;
+            --very-light-green: #F1F8E9;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--white);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ====== HEADER ====== */
+        header {
+            background: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(124, 179, 66, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 80px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            color: var(--green);
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        /* ====== MOBILE MENU ====== */
+        .menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--dark-green);
+        }
+        
+        /* ====== HERO SLIDER ====== */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            padding-top: 70px;
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--white);
+            width: 90%;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .slide-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--green);
+        }
+        
+        .btn-green {
+            background: var(--green);
+            color: var(--white);
+        }
+        
+        .btn-transparent {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--light-green);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(124, 179, 66, 0.3);
+        }
+        
+        .btn-green:hover {
+            background: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+        
+        .btn-transparent:hover {
+            background: var(--green);
+            color: var(--white);
+            border-color: var(--green);
+        }
+
+        /* ====== SECTIONS ====== */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            color: var(--green);
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--green);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            position: sticky;
+            top: 100px;
+            text-align: center;
+        }
+        
+        .guaranteed-mobile-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(124, 179, 66, 0.2);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            background: var(--very-light-green);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid var(--light-green);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(124, 179, 66, 0.2);
+        }
+        
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            margin-bottom: 15px;
+            border: 3px solid var(--green);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .team-member h4 {
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+
+        /* ===== MISSION/VISION ===== */
+        .mission-vision {
+            background: var(#3356);
+        }
+        
+        .mv-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .mv-box {
+            flex: 1;
+            min-width: 300px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(124, 179, 66, 0.1);
+            border-left: 4px solid var(--green);
+        }
+        
+        .mv-box h3 {
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        /* ===== CORE VALUES ===== */
+        .core-values {
+            background: var(--white);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .value-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(124, 179, 66, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(124, 179, 66, 0.1);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            background: var(--very-light-green);
+        }
+        
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+        
+        .value-card h3 {
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            background: var(#3356);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--light-green);
+            border-radius: 5px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(124, 179, 66, 0.2);
+        }
+        
+        .service-card h3 {
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact {
+            background: var(--light-bg);
+        }
+        
+        .contact-map {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 3px solid var(--light-green);
+        }
+        
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--green);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--light-green);
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--green);
+            color: var(--white);
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* ====== MOBILE STYLES ====== */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s;
+                box-shadow: 0 2px 10px rgba(124, 179, 66, 0.2);
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                position: static;
+                margin-bottom: 30px;
+                
+            
+            }
+            
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .team-members {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="logo.jpg" alt="Logo" class="logo-img">
+                <span class="logo-text">BPC LTD</span>
+            </a>
+            <div class="menu-btn" id="menuBtn">☰</div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#mission">Mission</a></li>
+                    <li><a href="#core-values">Core Values</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SLIDER -->
+    <section class="hero" id="home">
+        <!-- SLIDE 1 -->
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="slide-content">
+                <h1>Pharmacy Business Experts in Rwanda</h1>
+                <div class="btn-container">
+                    <a href="buy-pharmacy.html" class="btn btn-green">Buy Pharmacy</a>
+                    <a href="sell-pharmacy.html" class="btn btn-transparent">Sell Pharmacy</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SLIDE 2 -->
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="slide-content">
+                <h1>Consultancy & Compliance Services</h1>
+                <div class="btn-container">
+                    <a href="buy-pharmacy.html" class="btn btn-green">Buy Pharmacy</a>
+                    <a href="sell-pharmacy.html" class="btn btn-transparent">Sell Pharmacy</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SLIDE 3 -->
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="slide-content">
+                <h1>Staff Training & Business Optimization</h1>
+                <div class="btn-container">
+                    <a href="buy-pharmacy.html" class="btn btn-green">Buy Pharmacy</a>
+                    <a href="sell-pharmacy.html" class="btn btn-transparent">Sell Pharmacy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Who We Are</h2>
+            </div>
+
+            <div class="about-content">
+                <!-- Left: Image -->
+                <div class="about-image">
+                    <img src="newabout.jpg" 
+                         alt="Bendik Pharmacy Team" 
+                         class="guaranteed-mobile-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div class="about-text">
+                    <p>We are a team of dedicated professionals with a shared mission: to elevate the success of pharmacy businesses through expert consulting, strategic insight, and personalized support.</p>
+                    <br>
+                    <p>At the heart of our work is a commitment to integrity, innovation, and partnership. We combine our experience, operational know-how and financial skills to help pharmacies grow sustainably, remain compliant, and deliver exceptional patient care.</p>
+                    <br>
+                    <p>we help investors willing to invest in Retail Pharmacy in Rwanda, to buy or start a retail pharmacy from scratch.</p>
+                    <p>We link buyers with sellers of Retail pharmacy across the country.</p>
+                    <p>We also offer advice on pharmacy site selection and Pharmacist recruitment.</p>
+                    
+                    <div class="team-members">
+                        <div class="team-member">
+                            <img src="clement.jpg" alt="Pharmacist Clement">
+                            <h4>Pharmacist Clement</h4>
+                            <p>CEO with over ten years experience in retail pharmacy practice, operations, and regulatory compliance.</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="atanase.jpg" alt="Pharmacist Athanase">
+                            <h4>Pharmacist Athanase</h4>
+                            <p>Operations Manager with deep understanding of Rwandan market challenges and opportunities. He has experience of over 11 years in retail pharmacy management.</p>
+                        </div>
+                        <div class="team-member">
+                            <h4>Accountant Janet</h4>
+                            <p>Expert accountant specializing in financial management, tax declaration, and business analysis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION/VISION SECTION -->
+    <section class="section mission-vision" id="mission">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Mission & Vision</h2>
+            </div>
+            <div class="mv-container">
+                <div class="mv-box">
+                    <h3>Our Mission</h3>
+                    <p>To empower pharmacies with innovative, data-driven strategies and expert guidance that optimize operations, ensure regulatory compliance, enhance patient care, and drive sustainable growth. We are committed to being a trusted partner in helping pharmacy businesses thrive in a dynamic healthcare landscape.</p>
+                </div>
+                <div class="mv-box">
+                    <h3>Our Vision</h3>
+                    <p>To be the leading catalyst for innovation and excellence in pharmacy practice, transforming pharmacy businesses into high-performing, patient-centred healthcare providers through expert consulting, strategic insight, and unwavering commitment to quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE VALUES SECTION -->
+    <section class="section core-values" id="core-values">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Values</h2>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Integrity</h3>
+                    <p>We uphold the highest ethical standards, ensuring transparency, honesty, and trust in every client relationship.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Client-Centered Excellence</h3>
+                    <p>We prioritize our clients' success by delivering personalized, results-driven solutions that align with their goals and values.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovation</h3>
+                    <p>We embrace change and continuously seek creative, forward-thinking strategies to improve pharmacy operations and patient outcomes.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>Compliance & Accountability</h3>
+                    <p>We promote regulatory excellence and help our clients stay compliant while taking full responsibility for the quality of our services.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Collaboration</h3>
+                    <p>We believe in the power of teamwork within our organization and with our clients to achieve shared success.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Continuous Learning</h3>
+                    <p>We stay at the forefront of industry trends, technologies, and best practices to deliver informed, up-to-date guidance.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Impact-Driven</h3>
+                    <p>We aim to make a meaningful difference in healthcare by improving the sustainability and efficiency of pharmacy businesses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Pharmacy Startup Guidance</h3>
+                    <p>Expert advice on starting a new retail pharmacy business in Rwanda.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Buyer-Seller Connections</h3>
+                    <p>Linking pharmacy buyers with sellers through our online register.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Job Matching</h3>
+                    <p>Connecting pharmacists and nurses with pharmacy owners looking to recruit.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Staff Training</h3>
+                    <p>Comprehensive training programs for newly recruited pharmacy staff.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Contract Design</h3>
+                    <p>Professional employment contract creation tailored to pharmacy needs.</p>
+                </div>
+                <div class="service-card">
+                    <h3>SOP Development</h3>
+                    <p>Designing standard operation procedures for pharmacies.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Tax Declaration</h3>
+                    <p>Expert assistance with tax declaration and compliance matters.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Staff Recruitment</h3>
+                    <p>Specialized pharmacy staff recruitment services.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Pharmacy Valuation</h3>
+                    <p>Comprehensive pharmacy valuation and due diligence services.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Regulatory Compliance</h3>
+                    <p>Ensuring your pharmacy meets all regulatory requirements.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Inventory Management</h3>
+                    <p>Physical inventory and valuation services.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Strategic Planning</h3>
+                    <p>Growth strategies and market analysis for pharmacy businesses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            
+            <!-- MAP -->
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d4113.798536857876!2d30.097758800091484!3d-1.9687640086141918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sKicukiro%20District%20%2C%20Classic%20Hotel%20Road%20%2C%20Opposite%20MOH%20Building%2C%202nd%20Floor!5e0!3m2!1sen!2srw!4v1750496430216!5m2!1sen!2srw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> Kicukiro District, Classic Hotel Road, Opposite MOH Building, 2nd Floor</p>
+                        <p><i class="fas fa-phone"></i> 0783272900</p>
+                        <p><i class="fas fa-id-card"></i> TIN: 137506154</p>
+                        <p><i class="fas fa-envelope"></i> bendikpharmacyconsultancy@gmail.com</p>
+                        <p><i class="fas fa-globe"></i> www.bendikpharmacyconsult.com</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-green">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#mission">Mission</a>
+                <a href="#core-values">Core Values</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p>&copy; 2025 Bendik Pharmacy Consultancy Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- UPDATED SCRIPTS -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // MOBILE MENU TOGGLE - Updated to close when clicking links
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            const isExpanded = navMenu.classList.toggle('active');
+            menuBtn.setAttribute('aria-expanded', isExpanded);
+        });
+        
+        // Close menu when clicking nav links
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+        
+        // IMAGE SLIDER - Original unchanged
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        setInterval(nextSlide, 3000);
+        
+        // IMPROVED SMOOTH SCROLLING - Fixed header offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without jumping
+                    if (history.pushState) {
+                        history.pushState(null, null, this.getAttribute('href'));
+                    }
+                }
+            });
+        });
+        
+        // FORM SUBMISSION - Original unchanged
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will contact you soon.');
+            contactForm.reset();
+        });
+    </script>
+<!-- 3CX Live Chat - Real-Time Auto-Update Script -->
+<style>
+  call-us-selector, #wp-live-chat-by-3CX {
+    z-index: 999999 !important;
+    position: relative !important;
+  }
+</style>
+
+<call-us-selector phonesystem-url="https://1610.3cx.cloud" party="wwwsiftcom"></call-us-selector>
+
+<script defer src="https://downloads-global.3cx.com/downloads/livechatandtalk/v1/callus.js"
+        id="tcx-callus-js" charset="utf-8"></script>
+
+</body>
+</html>
